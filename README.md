@@ -1,5 +1,9 @@
 # vscode-dev-conf README
 
+[![Build Status](https://travis-ci.org/litleleprikon/vscode-dev-conf.svg?branch=master)](https://travis-ci.org/litleleprikon/vscode-dev-conf)
+[![Maintainability](https://api.codeclimate.com/v1/badges/a508f0ef684045f9f1f2/maintainability)](https://codeclimate.com/github/litleleprikon/vscode-dev-conf/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/a508f0ef684045f9f1f2/test_coverage)](https://codeclimate.com/github/litleleprikon/vscode-dev-conf/test_coverage)
+
 This is the README for your extension "vscode-dev-conf". After writing up a brief description, we recommend including the following sections.
 
 ## Features

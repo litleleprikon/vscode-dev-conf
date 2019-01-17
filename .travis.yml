@@ -1,0 +1,41 @@
+language: node_js
+node_js:
+- '10.0'
+addons:
+  code_climate:
+    repo_token:
+      secure: BeOqhcxlxeL0ACOgz/HvpuWvaKkQPBZsmb5PZAGxFfyN6m5bJb4sNrSwTstBk8HTA//pTBzNjvw7dyZ/zhajIAn2rboEQXKwWtrFNLUspJBWwaqm6wNTc8HRetyRWNHUn1atWB2cEwLDZ2o3YHkyA4YDyfg4torFcemRRL+7QvsAp6gNWgkotY2DmOaYU5rJwT4iVeWh1IKWPXCvcB1WH5gsTQwA3WiTPczLcUR+h+w3Eqq/U2ziuO6IbXH+yHT2qX1WvQeCo4C1wVCsphb7qLqP/SwkW/3sjiOSVuqb79uMwuikEdUozddc+BtEYGYWOiRFkFEKE3jXrTIr6ZvtmbKh626Vi9aRzpPDK5K20wA8zun1otgJnRMEE+hvCmoG+R96G5Gh4jc1a3b8zdm2Q/llE63aliH9y8eBL7vxn1BVI/aOcA8P5IBHMBv0UepPbPXdz1MUP/kzLwcHZcyJdAsDStj8GnG2Xd2k+ZVgEGCR/t9R5gaHnJYdQukzLYEF28Pk+iC+sDUeKckU8XsZBbAnLuhywuxyg+5ciBM4NNza9Z44V7Uz8k+KuoG10vFWP7vIiiSdbySx9w2l8ikNCWwvOALTanpKd5zri8xILMfIG1/Aj0GYFcDVxDya/eSBvQ5xA3qGlvDsosvRaX+jqZ6kugd9xfA0+aSY6vlEmlg=
+before_install:
+- if [ $TRAVIS_OS_NAME == "linux" ]; then export CXX="g++-4.9" CC="gcc-4.9" DISPLAY=:99.0;
+  sh -e /etc/init.d/xvfb start; sleep 3; fi
+install:
+- yarn install
+- yarn vscode:prepublish
+script:
+- yarn lint:editorconfig
+- yarn lint:ts
+- yarn test --silent
+after_success:
+- bash <(curl -s https://codecov.io/bash)
+- yarn codeclimate-test-reporter < coverage/lcov.info
+- yarn global add vsce
+- vsce package
+deploy:
+- provider: releases
+  api_key:
+    secure: WvnZEuLZtLr1Vg1cpAj/XDZnTasv1d0PhfjqkF67bMGatVkx8O1Hgj2RO1fXSsZL/htqQIImxViE8NAfKy0swBf/hQ3FNotuknNVec/a7OH/HX+BNyKKF/veDd/U6oJmDeW/jWCfvZILcUkmkslqqCw5Fz22xUoKCkj9Zjzyu93/fRR37jZqqGIZ0Nn1z0xugmA9N8W/rwqtPpf3G+ZbdXpaa2nC0cYCrX7oxQUQINykaZ61fgjZkdc5IcaYWWW/c5QmY2YBqdLRut8HF8kBqOxc21BMGJOx8SiNO2Eu9z5GHw7ms/TRra+bEmwLWwfHkM+Sh6y5K6qUUWLf2hdOnjbs9tEE6wbBrfTxIZalFu7r9A9CSTqlBViVi01UN3LQp7LGFNVZ4c365VP0bgT7xWrKtjvPlkUD0PsWHSBWL4Rbbde3LvUsX2DJXKAwUTOU90AfIL3jIllR1werfdyjDgdyHBk8mUh9UMo3FeZDgLJUZ8dTWsDcQcZtj7Bd63NUAfrvYmZngzypTeHKFcij1TQvMY/1geg/iFiIYslSRVsPnFfbRI5FU7ShM3446masD22hUsAHhqHSphE+Ov2Pfp+ZMlqcmxV9RzzX3eGNEUrao8ukgmopyqQT01E/rbk2+P2+IP5Pli3NSwqhVLfXsChgNQojndi0hM2BkMPVNZA=
+  file_glob: true
+  file: "*.vsix"
+  skip_cleanup: true
+  on:
+    branch: master
+    tags: true
+- provider: script
+  script: vsce publish -p $VSCE_TOKEN
+  skip_cleanup: true
+  on:
+    branch: master
+    tags: true
+env:
+  global:
+    secure: LYuXlS51h0Px4HVc0no8cfjFhGlQtORPqH6dUg62Z8XR+57ZnB71bASkLVvbG7asKsMFwpGyP9p+dnk5ZfCZrhqbIE0s/6pOGUDbzVS9AqHB6kLiDSqIKiNGbBuUrGRPOcB03fEAOYu9GRQFTyFxTx9mDxXtWCnG2xcb403WlTHjIAAJHBtujWGxnbFCW8KYJrCxZb31z9Sxu/vJTZuRLgRnZdv4IEbrHsajmGA7R33D2VMN8Uhcl9tRrIy17FdUHBdN0LD61AvEcO6DO+CFmDSuTFPTi8XI9TycpJBAlTBy4NUZDZcQcPD2VMW79VA3yj1NLXiMbujErfAUfMgmt2rA4b4nwm/G8b5erq8iYQ+UwD854Wo+UwxrZAcqGlnsSuzGlAxlHyIC29hCwMopWF+oooEWNesIBoAajyp86neLQS/ahZwKmpSlRotpOkUVYfLu7fEjX1BXNuZP5VI2lD3I0da1gmZrkL4vmym7YiS10ZDz3Bw/MQkSienhcnOx6VugY+5QcJZGiAQxW5Hn8bxsf/IL/BFUeON2vqnkdUdaIF5plB+Admfrm+j+oFmey7A1oKjnm6DSnozAUfJ0bYa1gGpdEkpfacyGNZgLDYzj8OugpcPdO1An+fVffbKs/oIDA00u2kPWCOThMOJxgt5fBsQjk0TLZzbGpFH6H/M=
