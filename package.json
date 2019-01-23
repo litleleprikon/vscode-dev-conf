@@ -2,7 +2,7 @@
   "name": "vscode-dev-conf",
   "displayName": "DevConf example",
   "description": "",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "litleleprikon",
   "engines": {
     "vscode": "^1.30.0"
@@ -11,7 +11,7 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:ping.ping"
+    "*"
   ],
   "main": "./out/src/extension.js",
   "contributes": {

@@ -15,6 +15,10 @@ You should have ping command in you OS.
 
 ## Release Notes
 
+### 0.0.3
+
+Add button in status bar.
+
 ### 0.0.2
 
 Add ability to ping host.
