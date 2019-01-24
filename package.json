@@ -2,7 +2,7 @@
   "name": "vscode-dev-conf",
   "displayName": "DevConf example",
   "description": "",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "litleleprikon",
   "engines": {
     "vscode": "^1.30.0"
