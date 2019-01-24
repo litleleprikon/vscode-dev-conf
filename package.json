@@ -2,7 +2,7 @@
   "name": "vscode-dev-conf",
   "displayName": "DevConf example",
   "description": "",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "litleleprikon",
   "engines": {
     "vscode": "^1.30.0"
@@ -14,18 +14,36 @@
     "*"
   ],
   "main": "./out/src/extension.js",
+  "icon": "resources/network.svg",
   "contributes": {
     "commands": [
       {
         "command": "ping.ping",
         "title": "Ping Host"
       }
-    ]
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "ping-explorer",
+          "title": "Ping Explorer",
+          "icon": "resources/network.svg"
+        }
+      ]
+    },
+    "views": {
+      "ping-explorer": [
+        {
+          "id": "pings",
+          "name": "Pings"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",
     "compile": "yarn build",
-    "build": "tsc -p ./",
+    "build": "tsc -p ./ && cp -r ./resources ./out",
     "build:watch": "tsc -watch -p ./",
     "postinstall": "node ./node_modules/vscode/bin/install",
     "test": "yarn run compile && node ./node_modules/vscode/bin/test",

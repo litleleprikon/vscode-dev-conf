@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="31px" height="59px" viewBox="0 0 31 59" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>pin</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="pin" fill="#EEEEEE" fill-rule="nonzero">
+            <path d="M30.5,15 C30.5,6.729 23.771,0 15.5,0 C7.229,0 0.5,6.729 0.5,15 C0.5,22.934 6.695,29.431 14.5,29.949 L14.5,58 C14.5,58.553 14.948,59 15.5,59 C16.052,59 16.5,58.553 16.5,58 L16.5,29.949 C24.305,29.431 30.5,22.934 30.5,15 Z M15.5,28 C8.332,28 2.5,22.168 2.5,15 C2.5,7.832 8.332,2 15.5,2 C22.668,2 28.5,7.832 28.5,15 C28.5,22.168 22.668,28 15.5,28 Z" id="Shape"></path>
+            <path d="M10.5,7 C8.294,7 6.5,8.794 6.5,11 C6.5,13.206 8.294,15 10.5,15 C12.706,15 14.5,13.206 14.5,11 C14.5,8.794 12.706,7 10.5,7 Z M10.5,13 C9.397,13 8.5,12.103 8.5,11 C8.5,9.897 9.397,9 10.5,9 C11.603,9 12.5,9.897 12.5,11 C12.5,12.103 11.603,13 10.5,13 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>
