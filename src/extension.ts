@@ -4,6 +4,7 @@ import { ObservableStorage } from './ObservableStorage';
 import { Pinger } from './Pinger';
 import { UIController } from './UIController';
 import { PingTreeProvider } from './PingTreeProvider';
+import PingContentProvider from './PingContentProvider';
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -14,6 +15,7 @@ export function activate(context: vscode.ExtensionContext) {
     const pinger = new Pinger(storage);
     const uiController = new UIController(pinger);
     const treeProvider = new PingTreeProvider(storage);
+    const dataContentProvider = new PingContentProvider(storage);
 
     // registerCommand tells VSCode to use this callback for certain command
     // and creates disposable.
@@ -32,6 +34,15 @@ export function activate(context: vscode.ExtensionContext) {
     statusBarItem.command = commandId;
     // $(network) will be substituted with font-awesome icon
     statusBarItem.text = '$(network) Ping';
+
+    const registeredContentProvider = vscode.workspace.registerTextDocumentContentProvider(
+        PingContentProvider.scheme, dataContentProvider);
+
+    vscode.commands.registerCommand('ping.openPing', async (index: number, host: string) => {
+        const uri = PingContentProvider.createURI(index, host);
+        const doc = await vscode.workspace.openTextDocument(uri);
+        await vscode.window.showTextDocument(doc);
+    });
 
     statusBarItem.show();
     // Telling VSCode to use this disposables to release resources

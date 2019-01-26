@@ -39,7 +39,7 @@ export class PingTreeProvider implements TreeDataProvider<PingTreeItem> {
             }
         } else if (element instanceof ProbeTreeItem) {
             const probeResult = this.storage.get(element.index);
-            elements.push(new ProbePingTreeItem(element.index, probeResult.time));
+            elements.push(new ProbePingTreeItem(element.index, probeResult.time, probeResult.host));
         }
         return elements;
     }
@@ -75,13 +75,18 @@ export class ProbeTreeItem extends TreeItem {
 
 export class ProbePingTreeItem extends TreeItem {
     public label: string;
-
     constructor(
         index: number,
-        public readonly ping: number
+        public readonly ping: number,
+        host: string
     ) {
         super(`probe-${index}/ping`, TreeItemCollapsibleState.None);
         this.label = `${ping} ms`;
+        this.command = {
+            command: 'ping.openPing',
+            title: `Ping: ${host}.ping-result`,
+            arguments: [index, host],
+        };
     }
 
     public iconPath = getIconPaths('time');
